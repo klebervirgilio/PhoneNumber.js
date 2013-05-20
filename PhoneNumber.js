@@ -5,20 +5,20 @@ var PhoneNumber = (function (dataBase) {
   // Use strict in our context only - users might not want it
   'use strict';
 
-  const MAX_PHONE_NUMBER_LENGTH = 50;
-  const UNICODE_DIGITS = /[\uFF10-\uFF19\u0660-\u0669\u06F0-\u06F9]/g;
-  const NON_ALPHA_CHARS = /[^a-zA-Z]/g;
-  const NON_DIALABLE_CHARS = /[^,#+\*\d]/g;
-  const NON_DIALABLE_CHARS_ONCE = new RegExp(NON_DIALABLE_CHARS.source);
-  const BACKSLASH = /\\/g;
-  const SPLIT_FIRST_GROUP = /^(\d+)(.*)$/;
-  const VALID_ALPHA_PATTERN = /[a-zA-Z]/g;
-  const LEADING_PLUS_CHARS_PATTERN = /^[+\uFF0B]+/g;
+  var MAX_PHONE_NUMBER_LENGTH = 50;
+  var UNICODE_DIGITS = /[\uFF10-\uFF19\u0660-\u0669\u06F0-\u06F9]/g;
+  var NON_ALPHA_CHARS = /[^a-zA-Z]/g;
+  var NON_DIALABLE_CHARS = /[^,#+\*\d]/g;
+  var NON_DIALABLE_CHARS_ONCE = new RegExp(NON_DIALABLE_CHARS.source);
+  var BACKSLASH = /\\/g;
+  var SPLIT_FIRST_GROUP = /^(\d+)(.*)$/;
+  var VALID_ALPHA_PATTERN = /[a-zA-Z]/g;
+  var LEADING_PLUS_CHARS_PATTERN = /^[+\uFF0B]+/g;
 
   // Format of the string encoded meta data. If the name contains "^" or "$"
   // we will generate a regular expression from the value, with those special
   // characters as prefix/suffix.
-  const META_DATA_ENCODING = ["region",
+  var META_DATA_ENCODING = ["region",
                               "^(?:internationalPrefix)",
                               "nationalPrefix",
                               "^(?:nationalPrefixForParsing)",
@@ -28,7 +28,7 @@ var PhoneNumber = (function (dataBase) {
                               "^nationalPattern$",
                               "formats"];
 
-  const FORMAT_ENCODING = ["^pattern$",
+  var FORMAT_ENCODING = ["^pattern$",
                            "nationalFormat",
                            "^leadingDigits",
                            "nationalPrefixFormattingRule",
@@ -108,8 +108,8 @@ var PhoneNumber = (function (dataBase) {
               // the formats field from the main country.
               if (typeof entry[0] == "string")
                 entry[0] = ParseMetaData(countryCode, entry[0]);
-              let formats = entry[0].formats;
-              let current = ParseMetaData(countryCode, entry[n]);
+              var formats = entry[0].formats,
+               current = ParseMetaData(countryCode, entry[n]);
               current.formats = formats;
               return entry[n] = current;
             }
